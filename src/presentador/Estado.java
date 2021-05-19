@@ -3,6 +3,8 @@ package presentador;
 import java.util.ArrayList;
 
 import modelo.estado.MinisterioHacienda;
+import modelo.estado.MinisterioIndustria;
+import modelo.estado.MinisterioSocial;
 import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
 import modelo.ser.Ser;
@@ -21,11 +23,13 @@ public class Estado {
 	// dinero que tiene el estado o deuda
 	private long capital = 0;
 	private MinisterioHacienda ministerioHacienda = new MinisterioHacienda();
+	private MinisterioIndustria ministerioIndustria = new MinisterioIndustria();
+	private MinisterioSocial ministerioSocial = new MinisterioSocial();
 	private final ArrayList<Ser> seres = new ArrayList<>();
-	private final ArrayList<Ser> menores = new ArrayList<>();
-	private final ArrayList<Ser> ancianos = new ArrayList<>();
-	private final ArrayList<Ser> trabajadores = new ArrayList<>();
-	private final ArrayList<Ser> parados = new ArrayList<>();
+//	private final ArrayList<Ser> menores = new ArrayList<>();
+//	private final ArrayList<Ser> ancianos = new ArrayList<>();
+//	private final ArrayList<Ser> trabajadores = new ArrayList<>();
+//	private final ArrayList<Ser> parados = new ArrayList<>();
 
 	public Estado(long demanda) {
 		for (int i = 0; i < demanda / potenciaTrabajador; i++) {
@@ -42,33 +46,34 @@ public class Estado {
 	
 	private void comenzarPeriodo() {
 		// TODO Auto-generated method stub
-		long trabajadoresNecesarios=demanda-getProduccionPotencial();
-		contratar(trabajadoresNecesarios);
-		long trabajadoresFaltantes=trabajadoresNecesarios-trabajadores.size();
-		establecerNacimientos(trabajadoresFaltantes);
+		long trabajadoresNecesarios=demanda- ministerioIndustria.getProduccionPotencial();
+		ministerioIndustria.contratar(trabajadoresNecesarios);
+		long trabajadoresFaltantes=trabajadoresNecesarios-ministerioIndustria.getTrabajadores().size();
+		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
 	}
 
-	private void establecerNacimientos(long trabajadoresFaltantes) {
-		// TODO Auto-generated method stub
-		
-	}
+//	private void establecerNacimientos(long trabajadoresFaltantes) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
-	private long getProduccionPotencial() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	private long getProduccionPotencial() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
-	private void contratar(long trabajadoresNecesarios) {
-		// TODO Auto-generated method stub
-		
-	}
+//	private void contratar(long trabajadoresNecesarios) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	private void terminarPeriodo() {
 		// TODO Auto-generated method stub
-		capital+=calculamosProduccionPeriodica();
-		capital-=pagarCostesFabricacion();
-		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(menores.size(), ancianos.size(),
-									trabajadores.size(), getParados());
+		capital+=ministerioIndustria.calculamosProduccionPeriodica();
+		capital-=ministerioIndustria.pagarCostesFabricacion();
+		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(ministerioSocial.getMenores().size(),
+									ministerioSocial.getAncianos().size(),
+									ministerioIndustria.getTrabajadores().size(), ministerioIndustria.getParados());
 		
 		miPresupuesto.establecerPorcentajes(capital);
 		capital-=miPresupuesto.getTotal();
@@ -81,20 +86,20 @@ public class Estado {
 		
 	}
 
-	private ArrayList<Adulto> getParados() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private ArrayList<Adulto> getParados() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	private long pagarCostesFabricacion() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	private long pagarCostesFabricacion() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
-	private long calculamosProduccionPeriodica() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	private long calculamosProduccionPeriodica() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	private void naceSer() {
 		// TODO Auto-generated method stub
