@@ -2,6 +2,7 @@ package presentador;
 
 import java.util.ArrayList;
 
+import modelo.estado.MinisterioHacienda;
 import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
 import modelo.ser.Ser;
@@ -19,6 +20,7 @@ public class Estado {
 	private int potenciaTrabajador = 450;
 	// dinero que tiene el estado o deuda
 	private long capital = 0;
+	private MinisterioHacienda ministerioHacienda = new MinisterioHacienda();
 	private final ArrayList<Ser> seres = new ArrayList<>();
 	private final ArrayList<Ser> menores = new ArrayList<>();
 	private final ArrayList<Ser> ancianos = new ArrayList<>();
@@ -37,7 +39,7 @@ public class Estado {
 			historia++;
 		} while (historia < 120);
 	}
-
+	
 	private void comenzarPeriodo() {
 		// TODO Auto-generated method stub
 		long trabajadoresNecesarios=demanda-getProduccionPotencial();
@@ -65,11 +67,13 @@ public class Estado {
 		// TODO Auto-generated method stub
 		capital+=calculamosProduccionPeriodica();
 		capital-=pagarCostesFabricacion();
-		Presupuesto presupuesto=new Presupuesto(menores.size(), ancianos.size(), trabajadores.size(), 
-				getParados());
-		presupuesto.establecerPorcentajes(capital);
-		capital-=presupuesto.getTotal();
+		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(menores.size(), ancianos.size(),
+									trabajadores.size(), getParados());
+		
+		miPresupuesto.establecerPorcentajes(capital);
+		capital-=miPresupuesto.getTotal();
 		envejecer();
+		
 	}
 
 	private void envejecer() {
