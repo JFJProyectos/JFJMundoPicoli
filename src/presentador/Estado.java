@@ -3,6 +3,7 @@ package presentador;
 import java.util.ArrayList;
 
 import modelo.estado.MinisterioHacienda;
+import modelo.estado.MinisterioSocial;
 import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
 import modelo.ser.Ser;
@@ -21,9 +22,10 @@ public class Estado {
 	// dinero que tiene el estado o deuda
 	private long capital = 0;
 	private MinisterioHacienda ministerioHacienda = new MinisterioHacienda();
+	private MinisterioSocial ministerioSocial = new MinisterioSocial();
 	private final ArrayList<Ser> seres = new ArrayList<>();
-	private final ArrayList<Ser> menores = new ArrayList<>();
-	private final ArrayList<Ser> ancianos = new ArrayList<>();
+//	private final ArrayList<Ser> menores = new ArrayList<>();
+//	private final ArrayList<Ser> ancianos = new ArrayList<>();
 	private final ArrayList<Ser> trabajadores = new ArrayList<>();
 	private final ArrayList<Ser> parados = new ArrayList<>();
 
@@ -45,13 +47,13 @@ public class Estado {
 		long trabajadoresNecesarios=demanda-getProduccionPotencial();
 		contratar(trabajadoresNecesarios);
 		long trabajadoresFaltantes=trabajadoresNecesarios-trabajadores.size();
-		establecerNacimientos(trabajadoresFaltantes);
+		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
 	}
 
-	private void establecerNacimientos(long trabajadoresFaltantes) {
-		// TODO Auto-generated method stub
-		
-	}
+//	private void establecerNacimientos(long trabajadoresFaltantes) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	private long getProduccionPotencial() {
 		// TODO Auto-generated method stub
@@ -67,7 +69,7 @@ public class Estado {
 		// TODO Auto-generated method stub
 		capital+=calculamosProduccionPeriodica();
 		capital-=pagarCostesFabricacion();
-		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(menores.size(), ancianos.size(),
+		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(ministerioSocial.getMenores().size(), ministerioSocial.getAncianos().size(),
 									trabajadores.size(), getParados());
 		
 		miPresupuesto.establecerPorcentajes(capital);
