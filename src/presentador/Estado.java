@@ -46,7 +46,7 @@ public class Estado {
 	
 	private void comenzarPeriodo() {
 		// TODO Auto-generated method stub
-		long trabajadoresNecesarios=demanda- ministerioIndustria.getProduccionPotencial();
+		long trabajadoresNecesarios=demanda- ministerioIndustria.getProduccionPotencial(potenciaTrabajador);
 		ministerioIndustria.contratar(trabajadoresNecesarios);
 		long trabajadoresFaltantes=trabajadoresNecesarios-ministerioIndustria.getTrabajadores().size();
 		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);

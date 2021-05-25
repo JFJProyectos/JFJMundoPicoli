@@ -24,7 +24,7 @@ public class MinisterioIndustria {
 	}
 	
 	public ArrayList<Adulto> getParados() {
-		// TODO Auto-generated method stub
+		//
 		return null;
 	}
 	
@@ -38,9 +38,12 @@ public class MinisterioIndustria {
 		return 0;
 	}
 	
-	public long getProduccionPotencial() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getProduccionPotencial(int potenciaTrabajador) {
+		// tiene qe dar la cantidad de parados y trabajadores * 450
+		
+		int trabajadoresTotales=trabajadores.size();
+		int paradosTotales=parados.size();
+		return (trabajadoresTotales+paradosTotales)*potenciaTrabajador;
 	}
 
 
