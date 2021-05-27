@@ -24,7 +24,7 @@ public class Estado {
 	private long capital = 0;
 	private MinisterioHacienda ministerioHacienda = new MinisterioHacienda();
 	private MinisterioIndustria ministerioIndustria = new MinisterioIndustria();
-	private MinisterioSocial ministerioSocial = new MinisterioSocial();
+	private MinisterioSocial ministerioSocial = new MinisterioSocial(ministerioIndustria.getParados());
 	private final ArrayList<Ser> seres = new ArrayList<>();
 //	private final ArrayList<Ser> menores = new ArrayList<>();
 //	private final ArrayList<Ser> ancianos = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Estado {
 	
 	private void comenzarPeriodo() {
 		// TODO Auto-generated method stub
-		long trabajadoresNecesarios=demanda- ministerioIndustria.getProduccionPotencial(potenciaTrabajador);
+		long trabajadoresNecesarios=demanda/potenciaTrabajador;
 		ministerioIndustria.contratar(trabajadoresNecesarios);
 		long trabajadoresFaltantes=trabajadoresNecesarios-ministerioIndustria.getTrabajadores().size();
 		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
@@ -70,7 +70,7 @@ public class Estado {
 	private void terminarPeriodo() {
 		// TODO Auto-generated method stub
 		capital+=ministerioIndustria.calculamosProduccionPeriodica();
-		capital-=ministerioIndustria.pagarCostesFabricacion();
+		//capital-=ministerioIndustria.pagarCostesFabricacion();
 		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(ministerioSocial.getMenores().size(),
 									ministerioSocial.getAncianos().size(),
 									ministerioIndustria.getTrabajadores().size(), ministerioIndustria.getParados());
