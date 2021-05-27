@@ -23,9 +23,9 @@ public class MinisterioIndustria {
 		
 	}
 	
-	public ArrayList<Adulto> getParados() {
-		//
-		return null;
+	public ArrayList<Ser> getParados() {
+		
+		return parados;
 	}
 	
 	public long calculamosProduccionPeriodica() {
@@ -33,10 +33,10 @@ public class MinisterioIndustria {
 		return 0;
 	}
 	
-	public long pagarCostesFabricacion() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	public long pagarCostesFabricacion() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 	
 	public long getProduccionPotencial(int potenciaTrabajador) {
 		// tiene qe dar la cantidad de parados y trabajadores * 450

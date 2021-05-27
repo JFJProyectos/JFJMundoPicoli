@@ -107,4 +107,9 @@ public class Ser {
 	public Comportamiento getComportamiento() {
 		return comportamiento;
 	}
+
+	public long calculaNecesidad() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

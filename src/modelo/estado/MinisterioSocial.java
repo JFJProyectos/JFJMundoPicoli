@@ -1,6 +1,8 @@
 package modelo.estado;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import modelo.ser.Ser;
 
@@ -10,14 +12,26 @@ public class MinisterioSocial {
 	
 	private ArrayList<Ser> menores = new ArrayList<>();
 	private ArrayList<Ser> ancianos = new ArrayList<>();
+	private ArrayList<Ser> parados;
+	private Observer observador = new Observer() {
+		
+		@Override
+		public void update(Observable o, Object arg) {
+			parados.add(menores.remove(menores.indexOf(arg)));
+			
+		}
+	};
 	
-	
-	
-	public MinisterioSocial() {
+	//Ministerio social se encarga de pasar menores a parados cuando se hacen adultos
+	public MinisterioSocial(ArrayList<Ser> parados) {
 		super();
+		
 	}
 
-
+	public void añadeEsteMenor(Ser ser) {
+		menores.add(ser);
+		ser.addAdultoObserver(observador);
+	}
 
 	public void establecerNacimientos(long trabajadoresFaltantes) {
 		// TODO Auto-generated method stub
@@ -36,3 +50,4 @@ public class MinisterioSocial {
 		return ancianos;
 	}
 }
+
