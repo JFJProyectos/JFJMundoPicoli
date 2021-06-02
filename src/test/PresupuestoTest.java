@@ -9,19 +9,21 @@ import org.junit.jupiter.api.Test;
 
 import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
+import modelo.ser.Comportamiento;
+import modelo.ser.Ser;
 
 class PresupuestoTest {
-	ArrayList<Adulto> paradosList;
+	ArrayList<Ser> paradosList;
 
 	@BeforeEach
 	public void before() {
 		paradosList = new ArrayList<>();
-		paradosList.add(new Adulto());
-		paradosList.add(new Adulto());
-		paradosList.add(new Adulto());
-		paradosList.get(0).alimentar(0, 120);
-		paradosList.get(1).alimentar(0, 120);
-		paradosList.get(2).alimentar(0, 120);
+		paradosList.add(new Ser());
+		paradosList.add(new Ser());
+		paradosList.add(new Ser());
+		((Comportamiento) paradosList.get(0)).alimentar(0, 120);
+		((Comportamiento) paradosList.get(1)).alimentar(0, 120);
+		((Comportamiento) paradosList.get(2)).alimentar(0, 120);
 	}
 
 	@Test
@@ -36,9 +38,9 @@ class PresupuestoTest {
 		assertEquals(presupuesto.getPagoTrabajadores(), trabajadores);
 		assertEquals(presupuesto.getPagoParados(), parados);
 		assertEquals(-150, presupuesto.calculaDeficit(cantidad));
-		paradosList.get(0).alimentar(150, 120);
-		paradosList.get(1).alimentar(175, 120);
-		paradosList.get(2).alimentar(125, 120);
+		((Comportamiento) paradosList.get(0)).alimentar(150, 120);
+		((Comportamiento) paradosList.get(1)).alimentar(175, 120);
+		((Comportamiento) paradosList.get(2)).alimentar(125, 120);
 		presupuesto = new Presupuesto(10, 10, 10,paradosList);
 		cantidad = 1000;
 		parados=150;

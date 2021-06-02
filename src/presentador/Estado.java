@@ -48,6 +48,7 @@ public class Estado {
 		// TODO Auto-generated method stub
 		long trabajadoresNecesarios=demanda/potenciaTrabajador;
 		ministerioIndustria.contratar(trabajadoresNecesarios);
+		ministerioIndustria.despedir(demanda, potenciaTrabajador);
 		long trabajadoresFaltantes=trabajadoresNecesarios-ministerioIndustria.getTrabajadores().size();
 		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
 	}
