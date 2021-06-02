@@ -20,7 +20,20 @@ public class MinisterioIndustria {
 
 
 	public void contratar(long trabajadoresNecesarios) {
-		
+		if(trabajadoresNecesarios >= getParados().size()) {
+			for (Ser ser : parados) {
+				trabajadores.add(ser);
+			}
+		}else {
+			for (int i = 0; i < trabajadoresNecesarios; i++) {
+				trabajadores.add(parados.get(i));
+			}
+		}
+	}
+	public void despedir(long demanda, int potencia) {
+		while(demanda < potencia*getTrabajadores().size()) {
+			parados.add(trabajadores.remove(trabajadores.size()));
+		}
 	}
 	
 	public ArrayList<Ser> getParados() {
