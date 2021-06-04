@@ -49,8 +49,12 @@ public class Estado {
 		long trabajadoresNecesarios=demanda/potenciaTrabajador;
 		ministerioIndustria.contratar(trabajadoresNecesarios);
 		ministerioIndustria.despedir(demanda, potenciaTrabajador);
-		long trabajadoresFaltantes=trabajadoresNecesarios-ministerioIndustria.getTrabajadores().size();
-		ministerioSocial.establecerNacimientos(trabajadoresFaltantes);
+		long trabajadoresFaltantes=trabajadoresNecesarios-getTrabajadores();
+		for (int i = 0; i < trabajadoresFaltantes; i++) {
+			naceSer();
+			
+		}
+
 	}
 
 //	private void establecerNacimientos(long trabajadoresFaltantes) {
@@ -68,9 +72,13 @@ public class Estado {
 //		
 //	}
 
+	public long getTrabajadores() {
+		return ministerioIndustria.getTrabajadores().size();
+	}
+
 	private void terminarPeriodo() {
 		// TODO Auto-generated method stub
-		capital+=ministerioIndustria.calculamosProduccionPeriodica();
+		capital+=ministerioIndustria.calculamosProduccionPeriodica(potenciaTrabajador);
 		//capital-=ministerioIndustria.pagarCostesFabricacion();
 		Presupuesto miPresupuesto = ministerioHacienda.crearPresupuesto(ministerioSocial.getMenores().size(),
 									ministerioSocial.getAncianos().size(),
@@ -103,7 +111,9 @@ public class Estado {
 //	}
 
 	private void naceSer() {
-		// TODO Auto-generated method stub
+		Ser ser = new Ser();
+		seres.add(ser);
+		ministerioSocial.añadeEsteMenor(ser);
 
 	}
 }

@@ -9,23 +9,24 @@ import modelo.ser.Ser;
 //Se encargad de gestionar menores,ancianos y parados
 // se encarga del pago de estos sectores
 public class MinisterioSocial {
-	
+
 	private ArrayList<Ser> menores = new ArrayList<>();
 	private ArrayList<Ser> ancianos = new ArrayList<>();
 	private ArrayList<Ser> parados;
 	private Observer observador = new Observer() {
-		
+
 		@Override
 		public void update(Observable o, Object arg) {
 			parados.add(menores.remove(menores.indexOf(arg)));
-			
+
 		}
 	};
-	
-	//Ministerio social se encarga de pasar menores a parados cuando se hacen adultos
+
+	// Ministerio social se encarga de pasar menores a parados cuando se hacen
+	// adultos
 	public MinisterioSocial(ArrayList<Ser> parados) {
 		super();
-		
+
 	}
 
 	public void añadeEsteMenor(Ser ser) {
@@ -33,21 +34,16 @@ public class MinisterioSocial {
 		ser.addAdultoObserver(observador);
 	}
 
-	public void establecerNacimientos(long trabajadoresFaltantes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+//	public void establecerNacimientos(long trabajadoresFaltantes) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	public ArrayList<Ser> getMenores() {
 		return menores;
 	}
 
-
-
 	public ArrayList<Ser> getAncianos() {
 		return ancianos;
 	}
 }
-
