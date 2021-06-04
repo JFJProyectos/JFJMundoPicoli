@@ -23,15 +23,16 @@ public class MinisterioIndustria {
 		if(trabajadoresNecesarios >= getParados().size()) {
 			for (Ser ser : parados) {
 				trabajadores.add(ser);
+				parados.remove(ser);
 			}
 		}else {
 			for (int i = 0; i < trabajadoresNecesarios; i++) {
-				trabajadores.add(parados.get(i));
+				trabajadores.add(parados.remove(parados.indexOf(i)));
 			}
 		}
 	}
 	public void despedir(long demanda, int potencia) {
-		while(demanda < potencia*getTrabajadores().size()) {
+		while(demanda < calculamosProduccionPeriodica(potencia)) {
 			parados.add(trabajadores.remove(trabajadores.size()));
 		}
 	}
@@ -41,9 +42,9 @@ public class MinisterioIndustria {
 		return parados;
 	}
 	
-	public long calculamosProduccionPeriodica() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long calculamosProduccionPeriodica(int potencia) {
+		
+		return getTrabajadores().size()*potencia;
 	}
 	
 //	public long pagarCostesFabricacion() {

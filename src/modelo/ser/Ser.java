@@ -110,6 +110,6 @@ public class Ser {
 
 	public long calculaNecesidad() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Edades.adulto.getNecesidadVital();
 	}
 }
