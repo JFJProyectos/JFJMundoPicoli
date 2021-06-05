@@ -85,14 +85,17 @@ public class Estado {
 									ministerioIndustria.getTrabajadores().size(), ministerioIndustria.getParados());
 		
 		miPresupuesto.establecerPorcentajes(capital);
+		ministerioIndustria.pagoSector(miPresupuesto);
+		ministerioSocial.pagoSector(miPresupuesto);
 		capital-=miPresupuesto.getTotal();
 		envejecer();
 		
 	}
 
 	private void envejecer() {
-		// TODO Auto-generated method stub
-		
+		for (Ser ser : seres) {
+			ser.envejecer();
+		}
 	}
 
 //	private ArrayList<Adulto> getParados() {
