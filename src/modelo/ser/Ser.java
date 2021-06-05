@@ -82,7 +82,7 @@ public class Ser {
 		this.edad = edad;
 	}
 
-	protected void recalcularEsperanzaDeVida(int sueldo) {
+	public void recalcularEsperanzaDeVida(int sueldo) {
 		// TODO recalculando
 	}
 
@@ -109,7 +109,6 @@ public class Ser {
 	}
 
 	public long calculaNecesidad() {
-		// TODO Auto-generated method stub
 		return Edades.adulto.getNecesidadVital();
 	}
 }

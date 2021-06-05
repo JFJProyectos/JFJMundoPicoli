@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import modelo.presupuesto.Presupuesto;
+import modelo.ser.Comportamiento;
 import modelo.ser.Ser;
 
 //Se encargad de gestionar menores,ancianos y parados
 // se encarga del pago de estos sectores
-public class MinisterioSocial {
+public class MinisterioSocial implements Comportamiento{
 
 	private ArrayList<Ser> menores = new ArrayList<>();
 	private ArrayList<Ser> ancianos = new ArrayList<>();
@@ -26,7 +28,7 @@ public class MinisterioSocial {
 	// adultos
 	public MinisterioSocial(ArrayList<Ser> parados) {
 		super();
-
+		this.parados = parados;
 	}
 
 	public void añadeEsteMenor(Ser ser) {
@@ -45,5 +47,23 @@ public class MinisterioSocial {
 
 	public ArrayList<Ser> getAncianos() {
 		return ancianos;
+	}
+
+//	public void pagoSector(Presupuesto miPresupuesto) {
+//		for (Ser ser : ancianos) {
+//			alimentar(miPresupuesto.getPgoAncianos(), ser.getEsperanzaVida());
+//		}
+//		for (Ser ser : menores) {
+//			alimentar(miPresupuesto.getPagoMenores(), ser.getEsperanzaVida());
+//		}
+//		for (Ser ser : parados) {
+//			alimentar(miPresupuesto.getPagoParados(), ser.getEsperanzaVida());
+//		}
+//	}
+
+	@Override
+	public float alimentar(int sueldo, float esperanzaVida) {
+		return esperanzaVida;
+
 	}
 }

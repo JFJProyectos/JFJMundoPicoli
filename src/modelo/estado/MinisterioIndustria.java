@@ -2,12 +2,14 @@ package modelo.estado;
 
 import java.util.ArrayList;
 
+import modelo.presupuesto.Presupuesto;
 import modelo.ser.Adulto;
+import modelo.ser.Comportamiento;
 import modelo.ser.Ser;
 
 //Se encarga de los trabajadores y parados
 //porque se encarga de contratar y despedir
-public class MinisterioIndustria {
+public class MinisterioIndustria implements Comportamiento {
 	
 	private ArrayList<Ser> trabajadores = new ArrayList<>();
 	private ArrayList<Ser> parados = new ArrayList<>();
@@ -63,6 +65,22 @@ public class MinisterioIndustria {
 
 	public ArrayList<Ser> getTrabajadores() {
 		return trabajadores;
+	}
+
+
+	@Override
+	public float alimentar(int sueldo, float esperanzaVida) {
+		for (Ser ser : trabajadores) {
+			ser.recalcularEsperanzaDeVida(sueldo);
+		}
+		return esperanzaVida;
+	}
+
+
+	public void pagoSector(Presupuesto miPresupuesto) {
+		for (Ser ser : trabajadores) {
+			alimentar((int) miPresupuesto.getPagoTrabajadores(), ser.getEsperanzaVida());
+		}
 	}
 
 }
